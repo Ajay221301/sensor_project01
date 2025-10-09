@@ -8,7 +8,7 @@ from src.pipelines.train_pipelin import TrainingPipeline
 from src.pipelines.pred_pipeline import PredictionPipeline
 
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
 
 
 @app.route("/")
