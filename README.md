@@ -5,6 +5,8 @@ It undergoes many microfabrication processes, such as doping, ion implantation, 
 
 #### Dataset is taken from Kaggle and stored in mongodb
 
+<img width="2164" height="1356" alt="image" src="https://github.com/user-attachments/assets/e3920c76-3aa0-4e14-bbb9-b75242eb39c6" />
+
 
 ### ⚡ Automation & Deployment
 - Fully automated **CI/CD pipeline** using **GitHub Actions** for testing, building, and deployment.  
