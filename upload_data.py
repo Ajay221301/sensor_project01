@@ -11,10 +11,13 @@ client=MongoClient(uri)
 DATABASE_NAME="ASkills"
 COLLECTION_NAME="waferfault"
 
-df=pd.read_csv("C:\Users\aashu\OneDrive\Desktop\sensor_project\notebooks\wafer_23012020_041211 (1).csv")
+df=pd.read_csv(r"C:\Users\aashu\OneDrive\Desktop\sensor_project\notebooks\wafer_23012020_041211 (1).csv")
 
 df=df.drop("Unnamed: 0",axis=1)
 
+
+# Convert the data into json
 json_record=list(json.loads(df.T.to_json()).values())
 
+#now dump the data into the database
 client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_record)
