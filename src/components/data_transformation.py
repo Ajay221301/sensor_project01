@@ -7,6 +7,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import RobustScaler, FunctionTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from imblearn.over_sampling import SMOTE
 
 from src.constant import *
 from src.exception import CustomException
@@ -72,9 +73,9 @@ class DataTransformation:
              dataframe=self.get_data(feature_store_file_path=self.feature_store_file_path)
 
              X=dataframe.drop(columns= TARGET_COLUMN)
-             y= np.where(dataframe[TARGET_COLUMN]==-1,0,1)
+             y= np.where(dataframe[TARGET_COLUMN]==-1,1,0)
 
-             X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2)
+             X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state = 42,stratify=y)
 
              preprocessor=self.get_data_transformer_object()
 
@@ -86,8 +87,8 @@ class DataTransformation:
 
              self.utils.save_object(file_path=preprocessor_path,obj=preprocessor)
 
-             train_arr =np.c_[X_train_scaled,np.array(y_train)]
-             test_arr=np.c_[X_test_scaled,np.array(y_test)]
+             train_arr = np.c_[X_train_scaled, np.array(y_train)]
+             test_arr  = np.c_[X_test_scaled,  np.array(y_test)]
 
              return (train_arr,test_arr,preprocessor_path)
          except Exception as e:

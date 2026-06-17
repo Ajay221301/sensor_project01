@@ -71,7 +71,7 @@ class PredictionPipeline:
 
             input_dataframe[prediction_column_name] = [pred for pred in predictions]
 
-            target_column_mapping = {0:'bad',1: 'good'}
+            target_column_mapping = {0:'good',1: 'bad'}
 
             input_dataframe[prediction_column_name] = input_dataframe[prediction_column_name].map(target_column_mapping)
 

@@ -28,10 +28,10 @@ class TrainingPipeline:
     def start_model_training(self,train_arr,test_arr):
         try:
             model_trainer=ModelTrainer()
-            model_score= model_trainer.initiate_model_trainer(
+            trained_model_path,model_score= model_trainer.initiate_model_trainer(
                 train_arr,test_arr
             )
-            return model_score
+            return trained_model_path,model_score
         except Exception as e:
             raise CustomException(e,sys)
         
@@ -39,8 +39,8 @@ class TrainingPipeline:
         try:
             feature_store_file_path = self.start_data_ingestion()
             train_arr,test_arr,preprocessor_path = self.start_data_transformation(feature_store_file_path)
-            r2_square = self.start_model_training(train_arr,test_arr)
+            trained_model_path,model_score = self.start_model_training(train_arr,test_arr)
 
-            print("Training completed. Trained model score: ",r2_square)
+            print(f"Training completed. Trained model f1 score: {model_score}. Model saved at : {trained_model_path}")
         except Exception as e:
             raise CustomException(e,sys)
